@@ -14,5 +14,11 @@ describe('App', () => {
     it('should have 2 films', () => {
         expect(wrapper.vm.films).toHaveLength(2);
     });
+    it('should be able to add a fave film', () => {
+        wrapper.setData( {selectedFilm: filmData[0]} );
+        expect(wrapper.vm.selectedFilm.title).toMatch(filmData[0].title);
+        wrapper.vm.addToFaves();
+        expect(wrapper.vm.faveFilms).toHaveLength(1);
+    })
 
 });

@@ -26,7 +26,8 @@ export default {
   data(){
     return {
       films: [],
-      selectedFilm: null
+      selectedFilm: null,
+      faveFilms: []
     }
   },
   components: {
@@ -37,6 +38,9 @@ export default {
       fetch('https://ghibliapi.herokuapp.com/films')
       .then(response => response.json())
       .then(data => this.films = data)
+    },
+    addToFaves(){
+      this.faveFilms.push(this.selectedFilm)
     }
   },
   mounted() {
