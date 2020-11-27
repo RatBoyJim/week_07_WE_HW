@@ -12,6 +12,9 @@
       <film-details v-if="selectedFilm" :film="selectedFilm"></film-details>
     </div>
 
+      <button v-if="!faveFilms.includes(selectedFilm)" v-on:click="addToFaves">Add to Fave Films</button>
+ 
+      <fave-films :faveFilms="faveFilms"></fave-films>
 
   </div>
 </template>
@@ -19,6 +22,7 @@
 <script>
 
 import FilmDetail from './components/FilmDetail.vue';
+import FaveFilmList from './components/FaveFilmList.vue';
 import { eventBus } from '@/main.js';
 
 export default {
@@ -31,7 +35,8 @@ export default {
     }
   },
   components: {
-    'film-details': FilmDetail
+    'film-details': FilmDetail,
+    'fave-films': FaveFilmList
   },
   methods: {
     fetchData(){
@@ -44,7 +49,10 @@ export default {
     }
   },
   mounted() {
-    this.fetchData()
+    this.fetchData(),
+    eventBus.$on('film-deleted', index => {
+      this.faveFilms.splice(index, 1);
+    })
   }
 
 }
