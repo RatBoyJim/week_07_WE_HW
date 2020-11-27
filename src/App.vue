@@ -8,23 +8,29 @@
       <option v-for="(film, index) in films" :key="index" :value="film">{{film.title}}</option>
     </select>
 
+    <div>
+      <film-details v-if="selectedFilm" :film="selectedFilm"></film-details>
+    </div>
+
 
   </div>
 </template>
 
 <script>
 
+import FilmDetail from './components/FilmDetail.vue';
 import { eventBus } from '@/main.js';
 
 export default {
   name: 'app',
   data(){
     return {
-      films: []
+      films: [],
+      selectedFilm: null
     }
   },
   components: {
-
+    'film-details': FilmDetail
   },
   methods: {
     fetchData(){
