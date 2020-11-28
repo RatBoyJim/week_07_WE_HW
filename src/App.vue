@@ -44,16 +44,16 @@ export default {
     'fave-films': FaveFilmList,
     'watched-films': WatchedFilms
   },
-  computed: {
-    initialWatchedFilms: function(){
-      return this.faveFilms.forEach(film => {
-        if (this.watchedFilms.includes(film)) {
-          return;
-        }else{
-          return this.watchedFilms.push(film)
-        console.log(this.watchedFilms);
-        }
-  })}},
+  // computed: {
+  //   initialWatchedFilms: function(){
+  //     return this.faveFilms.forEach(film => {
+  //       if (this.watchedFilms.includes(film)) {
+  //         return;
+  //       }else{
+  //         return this.watchedFilms.push(film)
+  //       console.log(this.watchedFilms);
+  //       }
+  // })}},
   methods: {
     fetchData(){
       fetch('https://ghibliapi.herokuapp.com/films')
@@ -62,6 +62,11 @@ export default {
     },
     addToFaves(){
       this.faveFilms.push(this.selectedFilm)
+      if (this.watchedFilms.includes(this.selectedFilm)) {
+        return;
+      }else{
+        return this.addToWatched()
+      }
     },
     addToWatched(){
       this.watchedFilms.push(this.selectedFilm)
