@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>STUDIO GHIBLI FILMS</h1>
+  <div id="main-content">
+    <h1 id ="heading">STUDIO GHIBLI FILMS</h1>
 
    <label for="film-select">Select a Film:</label>
     <select id="film-select" v-model="selectedFilm">
@@ -19,8 +19,7 @@
 
       <watched-films :watchedFilms="watchedFilms"></watched-films>
 
-      <h2>Films I haven't watched yet</h2>
-      <p v-for="(film, index) in unwatchedFilms" :key="index">{{ film.title }}</p>
+      <unwatched-films :unwatchedFilms="unwatchedFilms"></unwatched-films>
 
   </div>
 </template>
@@ -40,13 +39,15 @@ export default {
       films: [],
       selectedFilm: null,
       faveFilms: [],
-      watchedFilms: []
+      watchedFilms: [],
+      unwatchedFilms: []
     }
   },
   components: {
     'film-details': FilmDetail,
     'fave-films': FaveFilmList,
-    'watched-films': WatchedFilms
+    'watched-films': WatchedFilms,
+    'unwatched-films': UnwatchedFilms
   },
   // computed: {
   //   unwatchedFilms: function() {
@@ -66,17 +67,20 @@ export default {
       fetch('https://ghibliapi.herokuapp.com/films')
       .then(response => response.json())
       .then(data => this.films = data)
+      .then(films => this.unwatchedFilms = films)
     },
-    addToFaves(){
+    addToFaves(index){
       this.faveFilms.push(this.selectedFilm)
+      this.unwatchedFilms.splice(index, 1)
       if (this.watchedFilms.includes(this.selectedFilm)) {
         return;
       }else{
         return this.addToWatched()
       }
     },
-    addToWatched(){
+    addToWatched(index){
       this.watchedFilms.push(this.selectedFilm)
+      this.unwatchedFilms.splice(index, 1);
     },
     removeFromUnwatched(index){
       this.unwatchedFilms.splice(index, 1);
@@ -94,8 +98,47 @@ export default {
 
 
 
-<style>
+<style lang="css" scoped>
+
+#main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#heading {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+}
+
 h1 {
   font-family: "Noto Sans SC";
+}
+
+label {
+  font-family: "Noto Sans SC";
+}
+
+select {
+  font-family: "Noto Sans SC";
+  max-width: 200px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+button {
+  font-family: "Noto Sans SC";
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+button:hover{
+  color: white;
+  background-color: black;
 }
 </style>

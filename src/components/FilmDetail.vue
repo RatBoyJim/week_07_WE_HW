@@ -18,4 +18,8 @@ export default {
 
 <style>
 
+.selected-film {
+  font-family: "Noto Sans SC";
+}
+
 </style>

@@ -25,4 +25,8 @@ export default {
 
 <style>
 
+#fave_films {
+  font-family: "Noto Sans SC";
+}
+
 </style>

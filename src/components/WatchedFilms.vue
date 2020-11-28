@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="watched_films">
         <h2>Films I have already watched</h2>
         <p v-for="(film, index) in watchedFilms" :key="index">{{film.title}}</p>
     </div>
@@ -14,5 +14,9 @@ export default {
 </script>
 
 <style>
+
+#watched_films {
+  font-family: "Noto Sans SC";
+}
 
 </style>

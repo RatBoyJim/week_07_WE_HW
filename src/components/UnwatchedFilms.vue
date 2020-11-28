@@ -14,4 +14,8 @@ export default {
 
 <style>
 
+.unwatched_films {
+  font-family: "Noto Sans SC";
+}
+
 </style>
