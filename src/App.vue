@@ -19,11 +19,15 @@
 
       <watched-films :watchedFilms="watchedFilms"></watched-films>
 
+      <h2>Films I haven't watched yet</h2>
+      <p v-for="(film, index) in unwatchedFilms" :key="index">{{ film.title }}</p>
+
   </div>
 </template>
 
 <script>
 
+import UnwatchedFilms from './components/UnwatchedFilms.vue';
 import WatchedFilms from './components/WatchedFilms.vue';
 import FilmDetail from './components/FilmDetail.vue';
 import FaveFilmList from './components/FaveFilmList.vue';
@@ -45,15 +49,18 @@ export default {
     'watched-films': WatchedFilms
   },
   // computed: {
-  //   initialWatchedFilms: function(){
-  //     return this.faveFilms.forEach(film => {
+  //   unwatchedFilms: function() {
+  //     let unwatchedFilmList = [];
+  //     return this.films.forEach(film => {
   //       if (this.watchedFilms.includes(film)) {
   //         return;
   //       }else{
-  //         return this.watchedFilms.push(film)
-  //       console.log(this.watchedFilms);
+  //         return unwatchedFilmList.push(film)
+  //         return unwatchedFilmList;
   //       }
-  // })}},
+  //       })
+  //     }
+  //   },
   methods: {
     fetchData(){
       fetch('https://ghibliapi.herokuapp.com/films')
@@ -70,9 +77,11 @@ export default {
     },
     addToWatched(){
       this.watchedFilms.push(this.selectedFilm)
-    }
-    
     },
+    removeFromUnwatched(index){
+      this.unwatchedFilms.splice(index, 1);
+    }
+  },
   mounted() {
     this.fetchData(),
     eventBus.$on('film-deleted', index => {
