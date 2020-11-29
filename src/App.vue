@@ -1,18 +1,18 @@
 <template>
   <div id="main-content">
     
-
+  <section class="film-select-container">
    <label for="film-select">Select a Film:</label>
     <select id="film-select" v-model="selectedFilm">
       <option disabled value="">Select a Film</option>
       <option v-for="(film, index) in films" :key="index" :value="film">{{film.title}}</option>
     </select>
-
+  </section>
     <div>
       <film-details v-if="selectedFilm" :film="selectedFilm"></film-details>
     </div>
 
-      <button v-if="!faveFilms.includes(selectedFilm) || selectedFilm" v-on:click="addToFaves">Add to Fave Films</button>
+      <button v-if="!faveFilms.includes(selectedFilm)" v-on:click="addToFaves">Add to Fave Films</button>
       <button v-if="!watchedFilms.includes(selectedFilm)" v-on:click="addToWatched">Add to Watched Films</button>
  
       <fave-films :faveFilms="faveFilms"></fave-films>
@@ -109,18 +109,22 @@ export default {
   justify-content: center;
 }
 
-#heading {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-h1 {
-  font-family: "Noto Sans SC";
-}
-
 label {
   font-family: "Noto Sans SC";
+}
+
+.film-select-container {
+    font-family: "Noto Sans SC";
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 2px solid black;
+    border-radius: 5px;
+    list-style-type: none;
+    max-width: 250px;
+    margin: 10px;
+    padding: 5px;
+    background-color: white;
 }
 
 select {

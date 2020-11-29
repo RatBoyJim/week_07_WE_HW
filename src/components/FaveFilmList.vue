@@ -1,10 +1,10 @@
 <template>
     <div id="fave_films">
         <h2>My Fave Films</h2>
-        <ul>
-            <li v-for="(faveFilm, index) in faveFilms" :key="index">{{faveFilm.title}}
+        <section class="fave_films_container">
+            <li class="fave_films" v-for="(faveFilm, index) in faveFilms" :key="index">{{faveFilm.title}}
             <button v-on:click="handleDelete(index)">Remove from Favourites</button></li>
-        </ul>
+        </section>
     </div>
 </template>
 
@@ -25,8 +25,29 @@ export default {
 
 <style>
 
+h2 {
+    margin-left: 10px;
+}
+
 #fave_films {
   font-family: "Noto Sans SC";
+}
+
+.fave_films_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.fave_films {
+    font-family: "Noto Sans SC";
+    border: 2px solid black;
+    border-radius: 5px;
+    list-style-type: none;
+    max-width: 250px;
+    margin: 10px;
+    padding: 5px;
+    background-color: white;
 }
 
 </style>
