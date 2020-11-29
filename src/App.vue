@@ -63,11 +63,16 @@ export default {
   //     }
   //   },
   methods: {
+    addToUnwatched(){
+      this.films.forEach(film => {
+        this.unwatchedFilms.push(film)
+      });
+    },
     fetchData(){
       fetch('https://ghibliapi.herokuapp.com/films')
       .then(response => response.json())
       .then(data => this.films = data)
-      .then(films => this.unwatchedFilms = films)
+      .then(this.addToUnwatched)
     },
     addToFaves(index){
       this.faveFilms.push(this.selectedFilm)
@@ -79,10 +84,7 @@ export default {
       }
     },
     addToWatched(index){
-      this.watchedFilms.push(this.selectedFilm)
-      this.unwatchedFilms.splice(index, 1);
-    },
-    removeFromUnwatched(index){
+      this.watchedFilms.push(this.selectedFilm);
       this.unwatchedFilms.splice(index, 1);
     }
   },
@@ -98,7 +100,7 @@ export default {
 
 
 
-<style lang="css" scoped>
+<style lang="css">
 
 #main-content {
   display: flex;
@@ -107,11 +109,20 @@ export default {
 }
 
 #heading {
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
 }
+
+#film-select {
+  display: flex;
+  justify-content: center;
+}
+ #main-content > h1 > select {
+  display: flex;
+  justify-content: center;
+ }
 
 h1 {
   font-family: "Noto Sans SC";
