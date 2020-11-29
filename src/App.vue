@@ -1,6 +1,6 @@
 <template>
   <div id="main-content">
-    <h1 id ="heading">STUDIO GHIBLI FILMS</h1>
+    <h1 id ="heading">STUDIO GHIBLI FILM TRACKER</h1>
 
    <label for="film-select">Select a Film:</label>
     <select id="film-select" v-model="selectedFilm">
@@ -20,7 +20,6 @@
       <watched-films :watchedFilms="watchedFilms"></watched-films>
 
       <unwatched-films :unwatchedFilms="unwatchedFilms"></unwatched-films>
-
   </div>
 </template>
 
@@ -74,18 +73,20 @@ export default {
       .then(data => this.films = data)
       .then(this.addToUnwatched)
     },
-    addToFaves(index){
-      this.faveFilms.push(this.selectedFilm)
-      this.unwatchedFilms.splice(index, 1)
+    addToFaves(){
+      this.faveFilms.push(this.selectedFilm);
       if (this.watchedFilms.includes(this.selectedFilm)) {
         return;
       }else{
-        return this.addToWatched()
+        return this.addToWatched();
       }
     },
-    addToWatched(index){
+    addToWatched(){
       this.watchedFilms.push(this.selectedFilm);
-      this.unwatchedFilms.splice(index, 1);
+      this.removeFromUnwatched(this.selectedFilm.id);
+    },
+    removeFromUnwatched(id){
+      return this.unwatchedFilms = this.unwatchedFilms.filter(el => el.id !==id)
     }
   },
   mounted() {
