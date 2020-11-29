@@ -1,6 +1,6 @@
 <template>
   <div id="main-content">
-    <h1 id ="heading">STUDIO GHIBLI FILM TRACKER</h1>
+    
 
    <label for="film-select">Select a Film:</label>
     <select id="film-select" v-model="selectedFilm">
@@ -12,7 +12,7 @@
       <film-details v-if="selectedFilm" :film="selectedFilm"></film-details>
     </div>
 
-      <button v-if="!faveFilms.includes(selectedFilm)" v-on:click="addToFaves">Add to Fave Films</button>
+      <button v-if="!faveFilms.includes(selectedFilm) || selectedFilm" v-on:click="addToFaves">Add to Fave Films</button>
       <button v-if="!watchedFilms.includes(selectedFilm)" v-on:click="addToWatched">Add to Watched Films</button>
  
       <fave-films :faveFilms="faveFilms"></fave-films>
@@ -112,18 +112,8 @@ export default {
 #heading {
   display: flex;
   flex-direction: row;
-  text-align: center;
   justify-content: center;
 }
-
-#film-select {
-  display: flex;
-  justify-content: center;
-}
- #main-content > h1 > select {
-  display: flex;
-  justify-content: center;
- }
 
 h1 {
   font-family: "Noto Sans SC";
