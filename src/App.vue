@@ -87,6 +87,13 @@ export default {
     },
     removeFromUnwatched(id){
       return this.unwatchedFilms = this.unwatchedFilms.filter(el => el.id !==id)
+    },
+    getDirectors(){
+      const directors = []
+      this.films.forEach(film => {
+        directors.push(film.director)
+      return directors;
+      });
     }
   },
   mounted() {
@@ -141,6 +148,8 @@ button {
   border-radius: 5px;
   margin-top: 15px;
   margin-right: 15px;
+  margin-left: 10px;
+  max-width: 250px;
 }
 
 button:hover{
