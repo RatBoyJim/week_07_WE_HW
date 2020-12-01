@@ -20,6 +20,8 @@
       <watched-films :watchedFilms="watchedFilms"></watched-films>
 
       <unwatched-films :unwatchedFilms="unwatchedFilms"></unwatched-films>
+
+      <div id="chart_div"></div>
   </div>
 </template>
 
@@ -104,6 +106,7 @@ export default {
   }
 
 }
+
 </script>
 
 
